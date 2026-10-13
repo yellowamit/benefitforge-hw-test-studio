@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  hw_db:
+    image: postgres:16-alpine
+    container_name: benefitforge_postgres
+    environment:
+      POSTGRES_USER: hw_admin
+      POSTGRES_PASSWORD: hw_secret
+      POSTGRES_DB: benefitforge_sandbox
+    ports:
+      - "5432:5432"
+    volumes:
+      - hw_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hw_admin -d benefitforge_sandbox"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+
+  hw_backend:
+    build: ./backend
+    container_name: benefitforge_backend
+    environment:
+      DATABASE_URL: postgresql://hw_admin:hw_secret@hw_db:5432/benefitforge_sandbox
+    ports:
+      - "8000:8000"
+    depends_on:
+      hw_db:
+        condition: service_healthy
+
+  hw_frontend:
+    build: ./frontend
+    container_name: benefitforge_frontend
+    environment:
+      VITE_API_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - hw_backend
+
+volumes:
+  hw_pgdata:

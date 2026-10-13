@@ -1,0 +1,37 @@
+:root {
+  --bg-page: #f3f6f4;
+  --bg-card: #ffffff;
+  --border-muted: #d8e2dc;
+  --sage-primary: #2d6a4f;
+  --sage-hover: #1b4332;
+  --sage-soft: #e9f2ec;
+  --text-main: #1c2b24;
+  --text-muted: #52665b;
+  --pass-bg: #d8f3dc;
+  --pass-text: #1b4332;
+  --fail-bg: #ffe5e5;
+  --fail-text: #9b2226;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg-page); color: var(--text-main); line-height: 1.5; }
+.studio-header { background: var(--sage-hover); color: #fff; padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+.studio-header h1 { font-size: 1.3rem; }
+.studio-header p { font-size: 0.84rem; color: #b7e4c7; }
+.container { max-width: 1280px; margin: 1.5rem auto; padding: 0 1.5rem; display: grid; gap: 1.5rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.card { background: var(--bg-card); border: 1px solid var(--border-muted); border-radius: 8px; padding: 1.25rem; }
+.card h2 { font-size: 1.02rem; color: var(--sage-hover); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-muted); padding-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
+.btn-group { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+button { background: var(--sage-primary); color: #fff; border: none; border-radius: 6px; padding: 0.45rem 0.85rem; font-size: 0.84rem; cursor: pointer; }
+button:hover { background: var(--sage-hover); }
+button.secondary { background: var(--sage-soft); color: var(--sage-hover); border: 1px solid var(--border-muted); }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th, td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border-muted); }
+th { background: var(--sage-soft); color: var(--sage-hover); }
+.badge { display: inline-block; padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.74rem; font-weight: 600; }
+.badge.PASSED, .badge.ACTIVE_FT, .badge.APPROVED { background: var(--pass-bg); color: var(--pass-text); }
+.badge.FAILED, .badge.PART_TIME, .badge.REJECTED { background: var(--fail-bg); color: var(--fail-text); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+label { display: block; font-size: 0.76rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.2rem; }
+select, input { width: 100%; padding: 0.42rem; border: 1px solid var(--border-muted); border-radius: 5px; font-size: 0.84rem; }
+.diff-box { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; background: var(--sage-soft); padding: 0.75rem; border-radius: 6px; font-size: 0.82rem; }

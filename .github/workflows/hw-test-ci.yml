@@ -1,0 +1,65 @@
+name: BenefitForge HW QA Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  hw-sandbox-verification:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: hw_admin
+          POSTGRES_PASSWORD: hw_secret
+          POSTGRES_DB: benefitforge_sandbox
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Pre-Flight DB Compliance Checks
+        working-directory: ./backend
+        env:
+          DATABASE_URL: postgresql://hw_admin:hw_secret@localhost:5432/benefitforge_sandbox
+        run: python scripts/preflight_hw_check.py
+
+      - name: Seed HIPAA-Safe Participant Cohorts
+        working-directory: ./backend
+        env:
+          DATABASE_URL: postgresql://hw_admin:hw_secret@localhost:5432/benefitforge_sandbox
+        run: python scripts/seed_hw_data.py --scenario all
+
+      - name: Execute Unit & Integration Tests + Generate Matrices
+        working-directory: ./backend
+        env:
+          DATABASE_URL: postgresql://hw_admin:hw_secret@localhost:5432/benefitforge_sandbox
+        run: pytest -v --cov=app
+
+      - name: Upload Prescribed HW Verification Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: hw-verification-matrices
+          path: backend/reports/
