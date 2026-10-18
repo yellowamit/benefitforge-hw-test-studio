@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: hw_secret
       POSTGRES_DB: benefitforge_sandbox
     ports:
-      - "5432:5432"
+      - "${HW_DB_PORT:-5432}:5432"
     volumes:
       - hw_pgdata:/var/lib/postgresql/data
     healthcheck:

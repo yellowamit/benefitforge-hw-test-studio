@@ -1,4 +1,4 @@
-import os, json, subprocess
+import os, sys, json, subprocess
 from decimal import Decimal
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -202,7 +202,7 @@ def trigger_sandbox_preflight():
 @app.post("/api/sandbox/run-tests")
 def trigger_pytest_execution():
     backend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    proc = subprocess.run(["pytest", "-v"], cwd=backend_dir, capture_output=True, text=True)
+    proc = subprocess.run([sys.executable, "-m", "pytest", "-v"], cwd=backend_dir, capture_output=True, text=True)
     return get_latest_reports(stdout=proc.stdout, returncode=proc.returncode)
 
 @app.get("/api/sandbox/reports")
@@ -214,10 +214,10 @@ def get_latest_reports(stdout: str = "", returncode: int = 0):
 
     results, md_content, csv_content = [], "", ""
     if os.path.exists(json_path):
-        with open(json_path, "r") as f: results = json.load(f)
+        with open(json_path, "r", encoding="utf-8") as f: results = json.load(f)
     if os.path.exists(md_path):
-        with open(md_path, "r") as f: md_content = f.read()
+        with open(md_path, "r", encoding="utf-8") as f: md_content = f.read()
     if os.path.exists(csv_path):
-        with open(csv_path, "r") as f: csv_content = f.read()
+        with open(csv_path, "r", encoding="utf-8") as f: csv_content = f.read()
 
     return {"returncode": returncode, "results": results, "markdown": md_content, "csv": csv_content, "stdout": stdout}

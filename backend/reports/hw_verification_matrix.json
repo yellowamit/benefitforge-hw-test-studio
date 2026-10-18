@@ -1,0 +1,83 @@
+[
+  {
+    "requirement_id": "HW-INT-01",
+    "persona": "Ananya Sharma (EMP-1001)",
+    "suite": "Integration (DB)",
+    "test_case": "test_valid_birth_qle_updates_tier_and_payroll_deduction_in_db",
+    "status": "PASSED",
+    "duration_ms": 41.25,
+    "error_detail": "Verified"
+  },
+  {
+    "requirement_id": "HW-INT-02",
+    "persona": "Meera Krishnan (EMP-2001)",
+    "suite": "Integration (DB)",
+    "test_case": "test_expired_qle_over_30_days_rolls_back_db_state",
+    "status": "PASSED",
+    "duration_ms": 9.19,
+    "error_detail": "Verified"
+  },
+  {
+    "requirement_id": "HW-INT-03",
+    "persona": "Rajesh Verma (EMP-3001)",
+    "suite": "Integration (DB)",
+    "test_case": "test_reject_aged_out_26yo_dependent_preserves_db",
+    "status": "PASSED",
+    "duration_ms": 11.18,
+    "error_detail": "Verified"
+  },
+  {
+    "requirement_id": "HW-INT-04",
+    "persona": "Vikram Patel (EMP-1002 Part-Time)",
+    "suite": "Integration (DB)",
+    "test_case": "test_part_time_employee_blocked_from_hdhp_enrollment",
+    "status": "PASSED",
+    "duration_ms": 9.37,
+    "error_detail": "Verified"
+  },
+  {
+    "requirement_id": "HW-UNIT-01",
+    "persona": "Child Turning 26 Boundary",
+    "suite": "Unit",
+    "test_case": "test_aca_dependent_age_out_exact_26th_birthday",
+    "status": "PASSED",
+    "duration_ms": 0.33,
+    "error_detail": "Verified"
+  },
+  {
+    "requirement_id": "HW-UNIT-02",
+    "persona": "Disabled Adult Child",
+    "suite": "Unit",
+    "test_case": "test_disabled_dependent_exempt_from_age_26_limit",
+    "status": "PASSED",
+    "duration_ms": 0.22,
+    "error_detail": "Verified"
+  },
+  {
+    "requirement_id": "HW-UNIT-03",
+    "persona": "Mid-Year QLE Filer",
+    "suite": "Unit",
+    "test_case": "test_qle_30_day_statutory_window_boundary",
+    "status": "PASSED",
+    "duration_ms": 0.32,
+    "error_detail": "Verified"
+  },
+  {
+    "requirement_id": "HW-UNIT-04",
+    "persona": "HDHP Subscriber",
+    "suite": "Unit",
+    "test_case": "test_hsa_statutory_limits_single_vs_family",
+    "status": "PASSED",
+    "duration_ms": 0.27,
+    "error_detail": "Verified"
+  },
+  {
+    "requirement_id": "HW-UNIT-05",
+    "persona": "Payroll Proration Engine",
+    "suite": "Unit",
+    "test_case": "test_per_paycheck_26_period_deduction_math",
+    "status": "PASSED",
+    "duration_ms": 0.46,
+    "error_detail": "Verified"
+  }
+]
