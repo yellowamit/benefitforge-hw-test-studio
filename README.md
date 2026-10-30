@@ -1,8 +1,7 @@
 # BenefitForge — Health & Welfare (HW) Eligibility & Life-Event Test Studio
 ![alt text](image.png)
-![
-  ![alt text](image-2.png)
-](image-1.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
 
 A full-stack QA and test-orchestration studio for **Health & Welfare benefits administration**. It lets benefits teams, QA engineers, and compliance reviewers seed realistic participant data, validate that eligibility rules are enforced correctly, simulate mid-year life-event changes, and produce audit-ready verification reports — all against a real PostgreSQL database.
 
